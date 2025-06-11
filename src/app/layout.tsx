@@ -2,15 +2,13 @@ import './globals.css';
 import './normailze.css';
 
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { Layout, Menu } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Link from 'next/link';
 
-const items = Array.from({ length: 2 }).map((_, index) => ({
-	key: index + 1,
-	label: `nav ${index + 1}`,
-}));
+import { customMenuToken } from '@/asset/antd/antd-set';
+import style from '@/asset/css/main-layout.module.css';
+import Header from '@/components/main-header';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -36,16 +34,19 @@ export default function RootLayout({
 		<html lang='ko'>
 			<body className={`${geistSans.variable} ${geistMono.variable}`}>
 				<AntdRegistry>
-					<Layout style={{ height: '100vh', width: '100vw' }}>
-						<header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100dvw', background: '#001529', padding: '1rem' }}>
-							<Link href='/' style={{ whiteSpace: 'nowrap', padding: '0.2rem 1rem' }}>
-								Generate SEO meta tags
-							</Link>
-							<Menu theme='dark' mode='horizontal' defaultSelectedKeys={['2']} items={items} style={{ width: '100%', justifyContent: 'flex-end' }} />
-						</header>
-						<main style={{ padding: '1rem 2rem', flex: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>{children}</main>
-						<footer style={{ textAlign: 'center', minHeight: '50px' }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</footer>
-					</Layout>
+					<ConfigProvider
+						theme={{
+							components: {
+								Menu: customMenuToken,
+							},
+						}}
+					>
+						<Layout className={style.main_layout}>
+							<Header />
+							<main className={style.main_warp}>{children}</main>
+							<footer className={style.main_footer}>SEO GENERATOR ©{new Date().getFullYear()} Created by H.B</footer>
+						</Layout>
+					</ConfigProvider>
 				</AntdRegistry>
 			</body>
 		</html>
