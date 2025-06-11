@@ -28,7 +28,7 @@
 	background: rgba(255, 255, 255, 0.1);
 }
 .main_nav {
-	width: 1000%;
+	width: 100%;
 	justify-content: flex-end;
 	background-color: transparent;
 }
@@ -48,4 +48,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media (max-width: 576px) {
+	.main_header {
+		flex-direction: column;
+	}
+	.main_header > a {
+		margin-bottom: 1rem;
+	}
+	.main_nav {
+		justify-content: center;
+		padding-top: 1rem;
+		gap: 0.5rem;
+	}
 }
