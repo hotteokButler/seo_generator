@@ -35,7 +35,6 @@ export default function Header() {
 		setCurrent(key);
 	};
 
-	console.log(current);
 	return (
 		<>
 			<header className={style.main_header}>
