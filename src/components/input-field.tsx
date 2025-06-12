@@ -44,7 +44,7 @@ export default function InputField() {
 				</li>
 				<li className={[style.org_input_con, !componentDisabled && style.org_view].join(' ')}>
 					<Typography.Title level={4}>Organization schema 추가 </Typography.Title>
-					<Form.Item name='logo' label='Logo' tooltip={inputToolTip.url}>
+					<Form.Item name='logo' label='Logo' tooltip={inputToolTip.logo}>
 						<Input placeholder='로고 링크' disabled={componentDisabled} />
 					</Form.Item>
 					<Form.Item name='tel' label='전화번호' rules={[{ required: false, message: '전화번호를 입력해 주세요' }]} tooltip={inputToolTip.url}>
@@ -68,7 +68,7 @@ export default function InputField() {
 								))}
 								{fields.length < 4 && (
 									<Form.Item>
-										<Button type='dashed' onClick={() => add()} block icon={<PlusOutlined />} disabled={componentDisabled}>
+										<Button type='dashed' color='cyan' onClick={() => add()} block icon={<PlusOutlined />} disabled={componentDisabled}>
 											SNS 링크 추가하기
 										</Button>
 									</Form.Item>
@@ -81,7 +81,9 @@ export default function InputField() {
 
 			{/* submit */}
 			<Form.Item>
-				<Button type='primary'>생성하기</Button>
+				<Button type='primary' className={style.submit_btn}>
+					생성하기
+				</Button>
 			</Form.Item>
 		</Form>
 	);
