@@ -3,7 +3,7 @@
 import { ExclamationCircleOutlined, MessageOutlined } from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
 import React, { useState } from 'react';
 
 import style from '@/asset/css/main-layout.module.css';
@@ -22,7 +22,8 @@ const items: MenuItem[] = [
 	},
 ];
 export default function Header({ header_title }: { header_title: string }) {
-	const [current, setCurrent] = useState('with_plan');
+	const segment = useSelectedLayoutSegment();
+	const [current, setCurrent] = useState(segment || 'with_plan');
 	const router = useRouter();
 
 	const onClick: MenuProps['onClick'] = (e) => {
