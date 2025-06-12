@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client';
 
 import styles from '@/asset/css/custom.module.css';
 import InputField from '@/components/input-field';
+import OutputCode from '@/components/output-code';
 
 unstableSetRender((node, container) => {
 	const cont = container as any;
@@ -19,15 +20,17 @@ unstableSetRender((node, container) => {
 	};
 });
 
+const demoCode = '<meat name="title" content="demoTitle"/>';
+
 export default function Home() {
 	return (
 		<div className={styles.main_wrapper}>
-			<Row wrap={true} gutter={[8, 8]} style={{ flex: 'auto' }}>
+			<Row wrap={true} gutter={[8, 8]} style={{ flex: 'auto', gap: '2%' }}>
 				<Col xs={{ flex: '100%' }} md={{ flex: '39%' }}>
 					<InputField />
 				</Col>
 				<Col xs={{ flex: '100%' }} md={{ flex: '59%' }}>
-					output
+					<OutputCode code={demoCode} />
 				</Col>
 			</Row>
 		</div>

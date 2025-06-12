@@ -2,7 +2,7 @@ import './globals.css';
 import './normailze.css';
 
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { ConfigProvider, Layout } from 'antd';
+import { App, ConfigProvider, Layout } from 'antd';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -49,7 +49,7 @@ export default function RootLayout({
 								<div className={c_style.main_title}>
 									<SubTitle mainText='SEO Tag Generator' subText='Generate SEO meta tag for your website' />
 								</div>
-								{children}
+								<App>{children}</App>
 							</main>
 							<footer className={style.main_footer}>SEO GENERATOR ©{new Date().getFullYear()} Created by H.B</footer>
 						</Layout>
