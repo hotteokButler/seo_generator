@@ -7,8 +7,10 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
 import { customMenuToken } from '@/asset/antd/antd-set';
+import c_style from '@/asset/css/custom.module.css';
 import style from '@/asset/css/main-layout.module.css';
 import Header from '@/components/main-header';
+import SubTitle from '@/components/sub-title';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -32,7 +34,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='ko'>
-			<body className={`${geistSans.variable} ${geistMono.variable}`}>
+			<body className={`${geistSans.variable} ${geistMono.variable}`} style={{ minWidth: '320px' }}>
 				<AntdRegistry>
 					<ConfigProvider
 						theme={{
@@ -42,8 +44,13 @@ export default function RootLayout({
 						}}
 					>
 						<Layout className={style.main_layout}>
-							<Header />
-							<main className={style.main_warp}>{children}</main>
+							<Header header_title='SEO Tag Generator' />
+							<main className={style.main_warp}>
+								<div className={c_style.main_title}>
+									<SubTitle mainText='SEO Tag Generator' subText='Generate SEO meta tag for your website' />
+								</div>
+								{children}
+							</main>
 							<footer className={style.main_footer}>SEO GENERATOR ©{new Date().getFullYear()} Created by H.B</footer>
 						</Layout>
 					</ConfigProvider>

@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+/* header */
+.main_title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.main_subtitle {
+	margin-bottom: 2rem;
+}
+.main_subtitle > span:first-child {
+	padding-right: 0.5rem;
+}
+.main_subtitle > span:last-child {
+	font-size: 0.95rem;
+	font-weight: 300;
+	display: block;
+	padding: 0.5rem 0 0.2rem;
+	text-indent: 1.85em;
+}
+
+/* contents */
+.main_wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+/* contents - input */
+.input_label {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+.org_input_con {
+	max-height: 0px;
+	height: 0px;
+	width: 100%;
+	overflow: hidden;
+	transition: 2s;
+}
+.org_input_con.org_view {
+	max-height: 100%;
+	height: auto;
+	overflow: visible;
+}

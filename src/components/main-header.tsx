@@ -21,7 +21,7 @@ const items: MenuItem[] = [
 		icon: <MessageOutlined />,
 	},
 ];
-export default function Header() {
+export default function Header({ header_title }: { header_title: string }) {
 	const [current, setCurrent] = useState('with_plan');
 	const router = useRouter();
 
@@ -38,7 +38,7 @@ export default function Header() {
 	return (
 		<>
 			<header className={style.main_header}>
-				<Link href='/'>Generate SEO meta tags</Link>
+				<Link href='/'>{header_title}</Link>
 				<Menu mode='horizontal' defaultSelectedKeys={[current]} items={items} className={style.main_nav} onClick={onClick} />
 			</header>
 		</>
