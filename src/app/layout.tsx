@@ -49,7 +49,7 @@ export default function RootLayout({
 								<div className={c_style.main_title}>
 									<SubTitle mainText='SEO Tag Generator' subText='Generate SEO meta tag for your website' />
 								</div>
-								<App>{children}</App>
+								<App style={{ width: '100%' }}>{children}</App>
 							</main>
 							<footer className={style.main_footer}>SEO GENERATOR ©{new Date().getFullYear()} Created by H.B</footer>
 						</Layout>

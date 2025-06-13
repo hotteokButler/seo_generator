@@ -37,7 +37,6 @@
 .main_warp {
 	flex-direction: column;
 	flex: auto;
-	justify-content: center;
 	align-items: center;
 	width: 100%;
 	max-width: 1240px;
