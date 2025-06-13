@@ -27,8 +27,13 @@ export default function InputField() {
 			}
 		};
 	};
+
+	const onFinish = (fieldsValue: any) => {
+		console.log(fieldsValue);
+	};
+
 	return (
-		<Form layout='vertical' form={form} requiredMark={CustomizeRequiredMark}>
+		<Form layout='vertical' form={form} onFinish={onFinish} requiredMark={CustomizeRequiredMark}>
 			<Form.Item name='title' label='Title' rules={[{ required: true, message: '홈페이지 타이틀을 입력해 주세요' }, { validator: validateField('title') }]} tooltip={inputToolTip.title}>
 				<Input placeholder='홈페이지 타이틀' />
 			</Form.Item>
@@ -72,7 +77,7 @@ export default function InputField() {
 				</li>
 				<li className={[style.org_input_con, !componentDisabled && style.org_view].join(' ')}>
 					<Typography.Title level={4}>Organization schema 추가 </Typography.Title>
-					<Form.Item name='logo' label='Logo' tooltip={inputToolTip.logo}>
+					<Form.Item name='logo' label='Logo' tooltip={inputToolTip.logo} rules={[{ required: false }, { validator: validateField('logo') }]}>
 						<Input placeholder='로고 링크' disabled={componentDisabled} />
 					</Form.Item>
 					<Form.Item name='tel' label='전화번호' tooltip={inputToolTip.url} rules={[{ required: false }, { validator: validateField('tel') }]}>
@@ -115,7 +120,7 @@ export default function InputField() {
 
 			{/* submit */}
 			<Form.Item>
-				<Button type='primary' className={style.submit_btn}>
+				<Button type='primary' htmlType='submit' className={style.submit_btn}>
 					생성하기
 				</Button>
 			</Form.Item>
