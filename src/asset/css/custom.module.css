@@ -47,6 +47,14 @@
 	height: auto;
 	overflow: visible;
 }
+.tel_prefix_input {
+	margin: 0 !important;
+	padding: 0 !important;
+	min-width: 6.5em;
+}
+.tel_prefix_input .ant-form-item-control-input {
+	min-height: 1px !important;
+}
 
 /* button */
 .submit_btn {
@@ -76,6 +84,7 @@
 	padding: 1.8em 1.5em;
 	display: block;
 	min-height: 20em;
+	overflow: scroll;
 }
 
 /* ai suggestion page */

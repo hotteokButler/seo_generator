@@ -6,7 +6,7 @@ import { App, ConfigProvider, Layout } from 'antd';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import { customMenuToken } from '@/asset/antd/antd-set';
+import { customMenuToken, globalToken } from '@/asset/antd/antd-set';
 import c_style from '@/asset/css/custom.module.css';
 import style from '@/asset/css/main-layout.module.css';
 import Header from '@/components/main-header';
@@ -41,6 +41,7 @@ export default function RootLayout({
 							components: {
 								Menu: customMenuToken,
 							},
+							token: globalToken,
 						}}
 					>
 						<Layout className={style.main_layout}>

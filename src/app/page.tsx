@@ -26,10 +26,10 @@ export default function Home() {
 	return (
 		<div className={styles.main_wrapper}>
 			<Row wrap={true} gutter={[8, 8]} style={{ flex: 'auto', gap: '2%' }}>
-				<Col xs={{ flex: '100%' }} md={{ flex: '39%' }}>
+				<Col xs={{ flex: '100%' }} md={{ flex: '50%' }}>
 					<InputField />
 				</Col>
-				<Col xs={{ flex: '100%' }} md={{ flex: '59%' }}>
+				<Col xs={{ flex: '100%' }} md={{ flex: '48%' }}>
 					<OutputCode code={demoCode} />
 				</Col>
 			</Row>

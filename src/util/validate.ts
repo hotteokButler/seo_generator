@@ -44,6 +44,10 @@ export const validateSchema = z.object({
 		.string()
 		.regex(/^[0-9]{2,4}(?:-[0-9]{3,4}){1,2}$/, "전화번호는 '000-0000-0000' 형태여야 합니다")
 		.optional(),
+	tel_prefix: z
+		.string()
+		.regex(/^[\+0-9\s]+$/)
+		.optional(),
 	sns: z.string().url({ message: '정확한 URL이어야 합니다.' }).optional(),
 });
 

@@ -28,14 +28,20 @@ export default function InputField() {
 		};
 	};
 
-	const onFinish = (fieldsValue: any) => {
+	const onFinish = (fieldsValue: ValidateSchemaType) => {
 		console.log(fieldsValue);
 	};
 
 	return (
 		<Form layout='vertical' form={form} onFinish={onFinish} requiredMark={CustomizeRequiredMark}>
 			<Form.Item name='title' label='Title' rules={[{ required: true, message: '홈페이지 타이틀을 입력해 주세요' }, { validator: validateField('title') }]} tooltip={inputToolTip.title}>
-				<Input placeholder='홈페이지 타이틀' />
+				<Input
+					placeholder='홈페이지 타이틀'
+					count={{
+						show: true,
+						max: 60,
+					}}
+				/>
 			</Form.Item>
 			<Form.Item
 				name='description'
@@ -43,7 +49,14 @@ export default function InputField() {
 				rules={[{ required: true, message: '홈페이지 설명을 입력해 주세요' }, { validator: validateField('description') }]}
 				tooltip={inputToolTip.description}
 			>
-				<TextArea rows={3} placeholder='홈페이지 설명' />
+				<TextArea
+					rows={3}
+					placeholder='홈페이지 설명'
+					count={{
+						show: true,
+						max: 150,
+					}}
+				/>
 			</Form.Item>
 			<Form.Item name='keyword' label='Keyword' tooltip={inputToolTip.keyword}>
 				<Input placeholder='콤마(,) 로 구분해서 작성해주세요 예: 키워드1, 키워드2,' />
@@ -66,23 +79,30 @@ export default function InputField() {
 			>
 				<Input placeholder='홈페이지 썸네일 이미지' />
 			</Form.Item>
-			<div>
-				<Switch defaultChecked />
-				&nbsp; Robots meta tag
-			</div>
+			<Form.Item name='use_robots' label='Robots meta tag' layout='horizontal'>
+				<Switch />
+			</Form.Item>
 			<ul>
 				<li>
-					<Switch onChange={() => setComponentDisabled((prev) => !prev)} />
-					&nbsp; Organization schema(필요시)
+					<Form.Item name='use_organization' label='Organization schema(필요시)' layout='horizontal'>
+						<Switch onChange={() => setComponentDisabled((prev) => !prev)} />
+					</Form.Item>
 				</li>
 				<li className={[style.org_input_con, !componentDisabled && style.org_view].join(' ')}>
 					<Typography.Title level={4}>Organization schema 추가 </Typography.Title>
 					<Form.Item name='logo' label='Logo' tooltip={inputToolTip.logo} rules={[{ required: false }, { validator: validateField('logo') }]}>
 						<Input placeholder='로고 링크' disabled={componentDisabled} />
 					</Form.Item>
-					<Form.Item name='tel' label='전화번호' tooltip={inputToolTip.url} rules={[{ required: false }, { validator: validateField('tel') }]}>
-						<Input addonBefore={<TelPreFix />} style={{ width: '100%' }} disabled={componentDisabled} />
+
+					<Form.Item label='전화번호' tooltip={inputToolTip.url} rules={[{ required: false }]}>
+						<Space.Compact style={{ width: '100%' }}>
+							<TelPreFix disabled={componentDisabled} />
+							<Form.Item name='tel' label='전화번호' rules={[{ required: false }, { validator: validateField('tel') }]} noStyle>
+								<Input disabled={componentDisabled} />
+							</Form.Item>
+						</Space.Compact>
 					</Form.Item>
+
 					<Typography.Text className={style.input_label}>{CustomizeRequiredMark('SNS 링크', { required: false })}</Typography.Text>
 					<Form.List name='sns_link'>
 						{(fields, { add, remove }) => (
@@ -117,7 +137,6 @@ export default function InputField() {
 					</Form.List>
 				</li>
 			</ul>
-
 			{/* submit */}
 			<Form.Item>
 				<Button type='primary' htmlType='submit' className={style.submit_btn}>

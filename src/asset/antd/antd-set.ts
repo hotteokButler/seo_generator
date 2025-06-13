@@ -8,3 +8,7 @@ export const customMenuToken = {
 	itemHoverColor: '#fff',
 	itemBg: 'transparent',
 };
+
+export const globalToken = {
+	lineWidth: 1,
+};
