@@ -3,6 +3,7 @@ import '@ant-design/v5-patch-for-react-19';
 
 import { unstableSetRender } from 'antd';
 import { Col, Row } from 'antd';
+import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import styles from '@/asset/css/custom.module.css';
@@ -20,17 +21,17 @@ unstableSetRender((node, container) => {
 	};
 });
 
-const demoCode = '<meat name="title" content="demoTitle"/>';
-
 export default function Home() {
+	const [generatedCode, setGeneratedCode] = useState<string | undefined>(undefined);
+
 	return (
 		<div className={styles.main_wrapper}>
 			<Row wrap={true} gutter={[8, 8]} style={{ flex: 'auto', gap: '2%' }}>
-				<Col xs={{ flex: '100%' }} md={{ flex: '50%' }}>
-					<InputField />
-				</Col>
 				<Col xs={{ flex: '100%' }} md={{ flex: '48%' }}>
-					<OutputCode code={demoCode} />
+					<InputField onGenerate={(generated) => setGeneratedCode(generated)} />
+				</Col>
+				<Col xs={{ flex: '100%' }} md={{ flex: '50%' }} className={styles.scroll_wrap}>
+					<OutputCode code={generatedCode} />
 				</Col>
 			</Row>
 		</div>

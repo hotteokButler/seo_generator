@@ -87,6 +87,11 @@
 	overflow: scroll;
 }
 
+/* scroll */
+.scroll_wrap {
+	overflow: scroll;
+}
+
 /* ai suggestion page */
 
 .ai_page_wrap {

@@ -8,12 +8,18 @@ import { z } from 'zod';
 
 import style from '@/asset/css/custom.module.css';
 import { inputToolTip } from '@/store/input-toolTip-text';
+import type { IFormValues } from '@/store/type/form-value-type';
+import generateTags from '@/util/generate-tags';
 import { validateSchema, ValidateSchemaType } from '@/util/validate';
 
 import CustomizeRequiredMark from './required-mark';
 import { TelPreFix } from './tel-prefix-selector';
 
-export default function InputField() {
+interface IInputField {
+	onGenerate: (tags: string) => void;
+}
+
+export default function InputField({ onGenerate }: IInputField) {
 	const [form] = Form.useForm<ValidateSchemaType>();
 	const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
 
@@ -28,8 +34,9 @@ export default function InputField() {
 		};
 	};
 
-	const onFinish = (fieldsValue: ValidateSchemaType) => {
-		console.log(fieldsValue);
+	const onFinish = (fieldsValue: IFormValues) => {
+		const generated = generateTags(fieldsValue);
+		onGenerate(generated);
 	};
 
 	return (
