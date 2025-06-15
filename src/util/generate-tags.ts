@@ -64,7 +64,7 @@ const generateTags = (vals: IFormValues): string => {
 	// OrganizationTag 사용시에만 활성화
 	if (use_organization) {
 		const org: Record<string, string | string[]> = {
-			'@@context': 'https://schema.org',
+			'@context': 'https://schema.org',
 			'@type': 'Organization',
 		};
 
@@ -75,9 +75,9 @@ const generateTags = (vals: IFormValues): string => {
 		if (Array.isArray(sns_link)) {
 			org.sameAs = sns_link.map((elem) => Object.values(elem)[0]);
 		}
-		const jsonLD = JSON.stringify(org, null, 2);
+		const jsonLD = JSON.stringify(org, null, 2).replace(/</g, '\\u003C').replace(/>/g, '\\u003E');
 
-		organizationTag.push(`<script type="application/ld+json">\n${jsonLD}\n</srcipt>`);
+		organizationTag.push(`<script type="application/ld+json">\n${jsonLD}\n</script>`);
 	}
 
 	return defaultTags.concat(ogTags, organizationTag).join('\n');
