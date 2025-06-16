@@ -37,6 +37,7 @@ export default function InputField({ onGenerate }: IInputField) {
 	const onFinish = (fieldsValue: IFormValues) => {
 		const generated = generateTags(fieldsValue);
 		onGenerate(generated);
+		setComponentDisabled(true);
 		form.resetFields();
 	};
 

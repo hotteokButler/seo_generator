@@ -73,7 +73,16 @@ const generateTags = (vals: IFormValues): string => {
 		if (logo) org.logo = logo; //logo
 		if (tel && telPrefix) org.telephone = `${telPrefix.trim()}-${tel.trim()}`; //tel
 		if (Array.isArray(sns_link)) {
-			org.sameAs = sns_link.map((elem) => Object.values(elem)[0]);
+			org.sameAs = sns_link.map((elem) => {
+				const url = Object.values(elem)[0];
+				if (url) {
+					return url;
+				} else {
+					return '';
+				}
+			});
+
+			org.sameAs.filter((elem) => elem !== '');
 		}
 		const jsonLD = JSON.stringify(org, null, 2).replace(/</g, '\\u003C').replace(/>/g, '\\u003E');
 
