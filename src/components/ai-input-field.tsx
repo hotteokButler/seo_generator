@@ -1,4 +1,4 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Switch } from 'antd';
 import React from 'react';
 
 import style from '@/asset/css/custom.module.css';
@@ -14,9 +14,17 @@ export default function AIInputField() {
 				<Input placeholder='콤마(,) 로 구분해서 작성해주세요 예: 키워드1, 키워드2,' />
 			</Form.Item>
 
+			<Form.Item name='use_robots' label='Use robots'>
+				<Switch />
+			</Form.Item>
+
+			<Form.Item name='use_organization' label='Get Organization Schema Form'>
+				<Switch />
+			</Form.Item>
+
 			{/* submit */}
 			<Form.Item>
-				<Button type='primary' className={style.submit_btn}>
+				<Button type='primary' htmlType='submit' className={style.submit_btn}>
 					제안받기
 				</Button>
 			</Form.Item>

@@ -1,8 +1,10 @@
+import '@ant-design/v5-patch-for-react-19';
 import './globals.css';
 import './normailze.css';
 
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { App, ConfigProvider, Layout } from 'antd';
+import { ConfigProvider } from 'antd';
+import { App, Layout } from 'antd';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 

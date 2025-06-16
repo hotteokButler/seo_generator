@@ -61,6 +61,9 @@ const generateTags = (vals: IFormValues): string => {
 	if (use_robots) {
 		defaultTags.push(use_robots ? `<meta name="robots" content="index,follow" />` : `<meta name="robots" content="noindex,nofollow" />`);
 	}
+	// 전화번호 링크 인식 방지
+	defaultTags.push(`<meta name="format-detection" content="telephone=no" />`);
+
 	// OrganizationTag 사용시에만 활성화
 	if (use_organization) {
 		const org: Record<string, string | string[]> = {
