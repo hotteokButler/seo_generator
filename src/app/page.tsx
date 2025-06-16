@@ -3,14 +3,14 @@
 import { unstableSetRender } from 'antd';
 import { Col, Row } from 'antd';
 import { useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, type Root } from 'react-dom/client';
 
 import styles from '@/asset/css/custom.module.css';
 import InputField from '@/components/input-field';
 import OutputCode from '@/components/output-code';
 
 unstableSetRender((node, container) => {
-	const cont = container as any;
+	const cont = container as Element & { _reactRoot?: Root };
 	cont._reactRoot ||= createRoot(cont);
 	const root = cont._reactRoot;
 	root.render(node);

@@ -10,7 +10,7 @@ import style from '@/asset/css/custom.module.css';
 import { inputToolTip } from '@/store/input-toolTip-text';
 import type { IFormValues } from '@/store/type/form-value-type';
 import generateTags from '@/util/generate-tags';
-import { validateSchema, ValidateSchemaType } from '@/util/validate';
+import { validateSchema } from '@/util/validate';
 
 import CustomizeRequiredMark from './required-mark';
 import { TelPreFix } from './tel-prefix-selector';
@@ -20,7 +20,7 @@ interface IInputField {
 }
 
 export default function InputField({ onGenerate }: IInputField) {
-	const [form] = Form.useForm<ValidateSchemaType>();
+	const [form] = Form.useForm<IFormValues>();
 	const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
 
 	const validateField = <K extends keyof typeof validateSchema.shape>(field: K) => {
