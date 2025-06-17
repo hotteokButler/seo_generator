@@ -23,20 +23,59 @@ export async function POST(req: Request) {
 
 	//  OpenAI 호출
 	const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-	const prompt = `
-키워드: ${body.keyword}
-Organization 포함: ${body.use_organization ? '예' : '아니오'}
-robots 태그: ${body.use_robots ? 'index,follow' : 'noindex,nofollow'}
+	const promptLines = [
+		// 1. 역할 및 목적
+		'당신은 최신 Google SEO에 최적화된 메타 태그를 생성하는 SEO 전문가입니다.',
 
-[지침]
-1. 키워드를 자연스럽게 포함한 SEO 최적화 메타 태그를 <head> 형태로 생성하세요.
-2. <title>은 50~60자, <meta name="description">은 140~160자로 유지하세요.
-3. 'and' 사용, '&'는 사용하지 마세요.
-4. <link rel="canonical">과 <meta name="robots"> 태그 포함하세요.
-5. [대표 url], [썸네일 이미지 링크], [로고링크], [이름], [대표전화번호], [sns링크1] 등은 대괄호로 표기하세요.
-6. Organization 포함이면 <script type="application/ld+json"> 내 Organization 스키마 포함하세요.
-7. 출력은 **오직 HTML 코드 문자열**로만 해주세요.
-`;
+		// 2. 사용자 입력
+		`키워드 (최대 10개, 쉼표로 구분): ${body.keyword}`,
+		`robots 사용: ${body.use_robots ? '예 (index,follow)' : '아니오 (noindex,nofollow)'}`,
+		`Organization 스키마 사용: ${body.use_organization ? '예' : '아니오'}`,
+		body.additional_req ? `추가 요청사항: ${body.additional_req}` : '추가 요청사항: 없음',
+
+		'',
+		'[지침]',
+
+		// 3. 고정 출력 태그 골격 (항상 포함)
+		'1. <title>은 50~60자 이내로 생성합니다.',
+		'2. <meta name="description" content="…">은 140~160자 이내로 생성합니다.',
+		'3. <meta name="keywords" content="키워드1,키워드2,…,키워드10"> (키워드 수 최대 10개)',
+		'4. <link rel="canonical" href="[대표 링크]">',
+		'5. <meta property="og:image" content="[썸네일 이미지 링크]">',
+		'6. <meta property="og:logo" content="[로고 이미지 링크]">',
+		'7. <meta name="format-detection" content="telephone=no">',
+		'8. <meta property="og:title" content="…">',
+		'9. <meta property="og:description" content="…">',
+		'10. <meta property="og:url" content="[대표 링크]">',
+
+		'',
+		// 4. 옵션 선택 시에만 포함할 태그
+		'[옵션 태그: robots 및 JSON-LD Organization 스키마]',
+		'– robots 사용 예시: <meta name="robots" content="index,follow">',
+		'– robots 미사용 예시: <meta name="robots" content="noindex,nofollow">',
+		'– Organization 스키마 사용 예시:',
+		'  <script type="application/ld+json">',
+		'  {',
+		'    "@context": "https://schema.org",',
+		'    "@type": "Organization",',
+		'    "name": "[이름]",',
+		'    "url": "[대표 링크]",',
+		'    "logo": "[로고 링크]",',
+		'    "telephone": "[국제번호 포함 전화번호]",',
+		'    "sameAs": [',
+		'      "[sns링크1]",',
+		'      "[sns링크2]"',
+		'    ]',
+		'  }',
+		'  </script>',
+
+		'',
+		// 5. 출력 형식
+		'출력은 **메타 태그 HTML 코드만**, `<head>` 태그 제외하여 문자열 형태로 내보내세요.',
+		'사용자 입력 placeholder(대표 링크, 썸네일, 이름 등)는 반드시 `[]`로 감싸서 표기하세요.',
+	];
+
+	const prompt = promptLines.filter(Boolean).join('\n');
 
 	try {
 		let resp;

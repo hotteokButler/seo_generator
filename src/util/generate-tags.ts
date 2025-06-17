@@ -1,25 +1,6 @@
 import { IFormValues } from '@/store/type/form-value-type';
 
-//하이픈, 언더바 연속 제거
-const filterHyphenAndUnderScore = (str: string): string => {
-	return str.replace(/[-_]/g, (s) => s[0]);
-};
-
-// XXS 기본 방지 추가
-const escapeHtmlElem = (str: string): string => {
-	return str
-		.replace(/&/g, '&amp') //
-		.replace(/</g, '&lt;') //
-		.replace(/>/g, '&gt;') //
-		.replace(/'/g, '&#39;') //
-		.replace(/"/g, '&quot;'); //
-};
-
-// 보안 필터
-const safetyHtml = (val: string): string => {
-	if (!val) return '';
-	return escapeHtmlElem(filterHyphenAndUnderScore(val));
-};
+import safetyHtml from './safety-html';
 
 const generateTags = (vals: IFormValues): string => {
 	const { title, description, keyword, url, thumb, use_robots, use_organization, logo, telPrefix, tel, sns_link } = vals;

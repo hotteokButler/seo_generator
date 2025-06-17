@@ -6,4 +6,5 @@ export const inputToolTip = {
 	logo: '홈페이지를 대표하는 로고가 저장된 이미지 url입니다.',
 	sns: '운영하는 sns 링크를 추가해 주세요',
 	thumbnail: '운영하는 홈페이지 썸네일 이미지 링크를 추가해 주세요',
+	additional_req: '추가 요청사항을 주세요. 예:신뢰감 있는 친절한 톤',
 };
