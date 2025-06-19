@@ -69,9 +69,7 @@ export default function AIInputField({ onGenerate }: IAiInputField) {
 			const json = await res.json();
 			if (!res.ok) throw new Error(json.error || '생성 실패');
 			const code = json.code as string;
-			console.log(code);
 			onGenerate(stripMarkdown(code));
-
 			//
 		} catch (e: unknown) {
 			if (isError(e)) {
@@ -82,6 +80,7 @@ export default function AIInputField({ onGenerate }: IAiInputField) {
 			//
 		} finally {
 			setLoading(false);
+			form.resetFields();
 		}
 	};
 
