@@ -51,9 +51,9 @@ export async function POST(req: Request) {
 		'',
 		// 4. 옵션 선택 시에만 포함할 태그
 		'[옵션 태그: robots 및 JSON-LD Organization 스키마]',
-		'– robots 사용 예시: <meta name="robots" content="index,follow">',
-		'– robots 미사용 예시: <meta name="robots" content="noindex,nofollow">',
-		'– Organization 스키마 사용 예시:',
+		'- robots 사용 예시: <meta name="robots" content="index,follow">',
+		'- robots 미사용 예시: <meta name="robots" content="noindex,nofollow">',
+		'- Organization 스키마 사용 예시:',
 		'  <script type="application/ld+json">',
 		'  {',
 		'    "@context": "https://schema.org",',
@@ -73,6 +73,7 @@ export async function POST(req: Request) {
 		// 5. 출력 형식
 		'출력은 **메타 태그 HTML 코드만**, `<head>` 태그 제외하여 문자열 형태로 내보내세요.',
 		'사용자 입력 placeholder(대표 링크, 썸네일, 이름 등)는 반드시 `[]`로 감싸서 표기하세요.',
+		'생성 후 필수로 마지막 라인에 []괄호 안은 복사 후 직접 변경해야 합니다.라는 문구 주석으로 추가하세요.',
 	];
 
 	const prompt = promptLines.filter(Boolean).join('\n');
